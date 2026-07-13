@@ -76,7 +76,7 @@
     }
     /* 바람 효과 캔버스 오버레이 설정 */
     #breeze-canvas {
-      mix-blend-mode: overlay;
+      mix-blend-mode: normal;
       pointer-events: none;
     }
   </style>
@@ -619,38 +619,40 @@
     class WindLine {
       constructor() {
         this.reset();
-        // 초기 생성 시 화면 내부에 흩뿌려지도록 x 위치 분산 설정
         this.x = Math.random() * canvas.width;
       }
 
       reset() {
-        this.x = -200; // 화면 왼쪽 밖에서 시작
+        this.x = -200; 
         this.y = Math.random() * canvas.height;
-        this.length = Math.random() * 150 + 80; // 곡선의 길이
-        this.speed = Math.random() * 1.5 + 1.0;   // 이동 속도
-        this.opacity = Math.random() * 0.25 + 0.05; // 부드럽고 흐릿한 투명도
-        this.amplitude = Math.random() * 20 + 5;   // 물결치는 높이(곡률)
-        this.frequency = Math.random() * 0.005 + 0.002; // 물결 주기
-        this.thickness = Math.random() * 1.5 + 0.5;   // 선 두께
+        this.length = Math.random() * 200 + 120;       // 선의 길이를 더 길게
+        this.speed = Math.random() * 2.5 + 1.8;         // 속도를 조금 더 빠르게
+        this.opacity = Math.random() * 0.4 + 0.5;       // ★ 최소 투명도를 50% ~ 최대 90%로 대폭 상향 (진하게 변경)
+        this.amplitude = Math.random() * 30 + 10;       // 곡률을 키워 더 역동적으로
+        this.frequency = Math.random() * 0.003 + 0.002; 
+        this.thickness = Math.random() * 2.5 + 1.5;     // ★ 선 두께를 더 도톰하게 (1.5px ~ 4.0px)
       }
 
       update() {
         this.x += this.speed;
-        // 화면 오른쪽 밖으로 벗어나면 다시 왼쪽으로 리셋
         if (this.x - this.length > canvas.width) {
           this.reset();
         }
       }
 
       draw() {
+        ctx.save(); // 그림자 효과를 위해 캔버스 상태 저장
+        
+        // ★ 은은하게 빛나는 흰색 네온(Glow) 효과 추가
+        ctx.shadowBlur = 6;
+        ctx.shadowColor = 'rgba(79, 255, 176, 0.4)';
+        
         ctx.beginPath();
         ctx.lineWidth = this.thickness;
-        ctx.strokeStyle = `rgba(79, 255, 176, ${this.opacity})`; // 브랜드 민트 색상을 옅게 활용
+        ctx.strokeStyle = `rgba(79, 255, 176, ${this.opacity})`; // 진해진 흰색 선
         
-        // 자연스러운 굴곡을 그리기 위한 다중 포인트 연산
         for (let i = 0; i < this.length; i += 5) {
           const currentX = this.x - i;
-          // Sine 파형을 이용해 흔들리는 바람줄기 구현
           const currentY = this.y + Math.sin(currentX * this.frequency) * this.amplitude;
           
           if (i === 0) {
@@ -660,6 +662,7 @@
           }
         }
         ctx.stroke();
+        ctx.restore(); // 다음 선을 위해 상태 복원
       }
     }
 
