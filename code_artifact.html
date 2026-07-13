@@ -1,689 +1,804 @@
 <!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>부산 산책 - 바다에서 공원까지, 기분 따라 걷는 길</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Hahmlet (역동적인 명조) & Plus Jakarta Sans (활력 넘치는 산세리프) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            deep: '#06101E',     /* 더욱 깊고 맑은 심해색 */
-                            dark: '#0B1E36',
-                            light: '#F0F4F8',
-                        },
-                        olive: {
-                            green: '#4E6C50',    /* 기획서: 올리브 그린 */
-                            light: '#F0F4F1',
-                            dark: '#3E543F',
-                        },
-                        mint: {
-                            DEFAULT: '#2EE59D',  /* 활기찬 라이트 민트 */
-                            glow: '#05FFA3',     /* 고대비 에너제틱 민트 */
-                            lime: '#D2F822',     /* 청량한 라임 그린 포인트 */
-                            soft: '#EAFDF6',
-                        },
-                        soft: {
-                            white: '#FAFCFB',    /* 청량한 화이트 */
-                            gray: '#F1F5F3',
-                        }
-                    },
-                    fontFamily: {
-                        title: ['"Hahmlet"', '"Noto Serif KR"', 'serif'],
-                        sans: ['"Plus Jakarta Sans"', '"Pretendard"', 'system-ui', 'sans-serif'],
-                    }
-                }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>바다에서 산까지, 기분 따라 걷는 부산 산책</title>
+  
+  <!-- Google Fonts: Hahmlet (제목용), Plus Jakarta Sans (영문용) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;600;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- 눈누 프리텐다드 폰트 (국문 본문용) -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Custom Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0F1A2C',      /* 깊은 바다와 밤하늘의 딥 네이비 */
+              olive: '#556B2F',     /* 싱그러운 자연을 닮은 올리브 그린 */
+              mint: '#4FFFB0',      /* 에너지를 더하는 상쾌한 라이트 민트 */
+              lime: '#D2FF24',      /* 액센트 라임그린 */
+              bgLight: '#F8F9FA',   /* 소프트 화이트 베이스 */
+              cardBg: '#1B2A41',    /* 다크 테마 카드 배경 */
             }
+          },
+          fontFamily: {
+            hahmlet: ['Hahmlet', 'serif'],
+            sans: ['Pretendard', 'Plus Jakarta Sans', 'sans-serif'],
+          }
         }
-    </script>
-    
-    <style>
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        body {
-            font-family: 'Plus Jakarta Sans', 'Pretendard', sans-serif;
-            background-color: #FAFCFB;
-            color: #0F172A;
-        }
-        /* 파도의 역동적인 느낌을 자아내는 백그라운드 블러 효과 */
-        .wave-gradient-1 {
-            background: radial-gradient(circle at 10% 20%, rgba(46, 229, 157, 0.15) 0%, transparent 45%);
-        }
-        .wave-gradient-2 {
-            background: radial-gradient(circle at 90% 80%, rgba(210, 248, 34, 0.12) 0%, transparent 50%);
-        }
-        /* 글래스모피즘 & 카드 라이브 후버 효과 */
-        .card-active-glow {
-            box-shadow: 0 0 25px rgba(46, 229, 157, 0.25);
-            border-color: rgba(46, 229, 157, 0.5);
-        }
-        .text-neon-glow {
-            text-shadow: 0 0 12px rgba(46, 229, 157, 0.4);
-        }
-        /* 파도타기형 텍스트 에니메이션 */
-        @keyframes waveFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .animate-wave {
-            animation: waveFloat 4s ease-in-out infinite;
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    /* 기본 폰트 설정 및 부드러운 스크롤 */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Pretendard', 'Plus Jakarta Sans', sans-serif;
+      background-color: #F8F9FA;
+      color: #0F1A2C;
+      overflow-x: hidden;
+    }
+
+    /* 함렛 서체 개별 바인딩 */
+    .font-title {
+      font-family: 'Hahmlet', serif;
+    }
+
+    /* 커스텀 스크롤바 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0F1A2C;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #556B2F;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4FFFB0;
+    }
+
+    /* 그라데이션 및 비주얼 효과 */
+    .hero-gradient {
+      background: linear-gradient(180deg, rgba(15, 26, 44, 0.4) 0%, rgba(15, 26, 44, 0.95) 100%);
+    }
+    .text-glow {
+      text-shadow: 0 0 15px rgba(79, 255, 176, 0.6);
+    }
+  </style>
 </head>
-<body class="overflow-x-hidden wave-gradient-1">
+<body class="selection:bg-brand-mint selection:text-brand-navy">
 
-    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-6" id="main-nav">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-            <!-- 로고 -->
-            <a href="#" class="font-title text-2xl font-black text-white tracking-widest flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-mint animate-ping"></span>
-                부산, 산책
-            </a>
-            <!-- 네비게이션 메뉴 (데스크탑) -->
-            <div class="hidden md:flex items-center space-x-10 text-sm tracking-widest font-semibold text-white/80">
-                <a href="#strengths" class="hover:text-mint transition-colors">매력</a>
-                <a href="#courses" class="hover:text-mint transition-colors">네 가지 코스</a>
-                <a href="#matcher" class="hover:text-mint transition-colors">오늘의 코스 매칭</a>
-            </div>
-            <!-- 우측 행동유도 버튼 -->
-            <div class="hidden md:block">
-                <a href="#matcher" class="bg-gradient-to-r from-mint to-mint-lime text-navy-deep px-6 py-2.5 rounded-full text-xs uppercase tracking-wider font-extrabold hover:shadow-[0_0_20px_rgba(46,229,157,0.5)] transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-                    오늘의 코스 찾기
-                </a>
-            </div>
-            <!-- 모바일 토글 버튼 -->
-            <button class="md:hidden text-white focus:outline-none" id="mobile-menu-btn" aria-label="메뉴 열기">
-                <i class="fa-solid fa-bars-staggered text-2xl"></i>
-            </button>
-        </div>
-        <!-- 모바일 드롭다운 메뉴 -->
-        <div class="hidden md:hidden absolute top-full left-0 w-full bg-navy-deep/95 border-b border-white/10 py-6 px-8 transition-all duration-300" id="mobile-menu">
-            <div class="flex flex-col space-y-4 text-white text-base tracking-wider font-light">
-                <a href="#strengths" class="hover:text-mint transition-colors py-2 font-semibold">매력</a>
-                <a href="#courses" class="hover:text-mint transition-colors py-2 font-semibold">네 가지 코스</a>
-                <a href="#matcher" class="hover:text-mint transition-colors py-2 font-semibold">오늘의 코스 매칭</a>
-                <hr class="border-white/10 my-2">
-                <a href="#matcher" class="bg-gradient-to-r from-mint to-mint-lime text-navy-deep text-center py-3 rounded-full font-bold">오늘의 코스 찾기</a>
-            </div>
-        </div>
-    </nav>
+  <!-- 네비게이션 바 -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-brand-navy/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="font-title text-xl md:text-2xl font-bold text-white tracking-wider flex items-center gap-2">
+        <span class="text-brand-mint">P</span>usan <span class="text-brand-lime">W</span>alk
+      </a>
+      
+      <!-- 데스크탑 메뉴 -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+        <a href="#about" class="hover:text-brand-mint transition-colors">매력 포인트</a>
+        <a href="#haeundae" class="hover:text-brand-mint transition-colors">해운대·동백섬</a>
+        <a href="#gwanganli" class="hover:text-brand-mint transition-colors">광안리·황령산</a>
+        <a href="#park" class="hover:text-brand-mint transition-colors">시민공원</a>
+        <a href="#cta" class="px-5 py-2.5 bg-brand-olive hover:bg-brand-mint hover:text-brand-navy text-white rounded-full font-semibold transition-all duration-300 text-xs tracking-wider">코스 저장하기</a>
+      </div>
 
-    <header class="relative w-full h-screen flex items-center justify-center overflow-hidden">
-        <!-- 배경 고품질 부산 바다 이미지 -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Busan Ocean Breeze" 
-                 class="w-full h-full object-cover scale-105 filter brightness-75 contrast-110"
-                 onerror="this.src='https://placehold.co/1920x1080/0A192F/FFFFFF?text=Busan+Vibrant+Ocean'">
-            <!-- 청량한 바다 색상을 가미한 그라데이션 오버레이 -->
-            <div class="absolute inset-0 bg-gradient-to-b from-navy-deep/65 via-navy-deep/80 to-navy-deep"></div>
-        </div>
-
-        <!-- 감각적이고 다이내믹한 텍스트 레이아웃 -->
-        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto text-white flex flex-col items-center">
-            <!-- 기획서 도입부 멘트 -->
-            <span class="text-xs md:text-sm tracking-[0.5em] text-mint font-extrabold uppercase mb-4 md:mb-6 animate-pulse text-neon-glow">
-                가장 부산다운 풍경 속으로 걸어 들어가는 시간.
-            </span>
-            
-            <!-- 물결 디바이더 -->
-            <div class="flex gap-1.5 mb-6 md:mb-8">
-                <span class="w-8 h-1 rounded-full bg-mint"></span>
-                <span class="w-3 h-1 rounded-full bg-mint-lime"></span>
-                <span class="w-1.5 h-1 rounded-full bg-white/50"></span>
-            </div>
-
-            <!-- 기획서 메인 캐치프레이즈 (Hahmlet 적용) -->
-            <h1 class="font-title text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-tight md:leading-normal mb-6 text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] animate-wave">
-                바다에서 공원까지,<br><span class="bg-gradient-to-r from-mint via-white to-mint-lime bg-clip-text text-transparent">기분 따라 걷는</span> 부산 산책
-            </h1>
-
-            <!-- 기획서 서브 캐치프레이즈 -->
-            <p class="text-base sm:text-lg md:text-xl tracking-wide text-white/80 font-medium max-w-xl mb-12 leading-relaxed">
-                정해진 루트는 없으니까. 발 닿는 대로
-            </p>
-
-            <!-- 청량하고 리드미컬한 이동 유도 버튼 -->
-            <a href="#strengths" class="animate-bounce p-3 border-2 border-mint/40 hover:border-mint rounded-full transition-all hover:bg-mint/10 group" aria-label="다음 섹션으로 이동">
-                <i class="fa-solid fa-chevron-down text-mint group-hover:text-mint-lime text-lg"></i>
-            </a>
-        </div>
-
-        <!-- 하단 파도 레이어 효과 -->
-        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-soft-white to-transparent"></div>
-    </header>
-
-    <section id="strengths" class="py-24 bg-gradient-to-b from-soft-white to-white relative">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <!-- 섹션 헤더 -->
-            <div class="text-center max-w-2xl mx-auto mb-16 md:mb-24 space-y-4">
-                <span class="text-xs font-extrabold tracking-widest text-mint-accent uppercase bg-mint-soft px-3 py-1 rounded-full">OUR STRENGTH</span>
-                <h2 class="font-title text-3xl sm:text-4xl md:text-5xl text-navy-deep font-extrabold">부산을 가치 있게 산책하는 이유</h2>
-                <div class="w-14 h-1 bg-gradient-to-r from-mint to-mint-lime mx-auto mt-4 rounded-full"></div>
-            </div>
-
-            <!-- 강점 3종 카드 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-                <!-- 카드 1: 대비되는 매력 -->
-                <div class="bg-white rounded-3xl p-8 shadow-[0_15px_35px_rgba(6,16,30,0.03)] border-2 border-slate-100 hover:border-mint/30 hover:shadow-[0_20px_40px_rgba(46,229,157,0.1)] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2">
-                    <div class="space-y-6">
-                        <div class="w-14 h-14 rounded-2xl bg-mint-soft flex items-center justify-center text-mint-accent text-2xl group-hover:bg-gradient-to-br group-hover:from-mint group-hover:to-mint-lime group-hover:text-navy-deep transition-all duration-300">
-                            <i class="fa-solid fa-water"></i>
-                        </div>
-                        <h3 class="font-title text-2xl font-bold text-navy-deep">대비되는 매력</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed font-normal">
-                            철썩이는 파도와 광활한 수평선을 안겨주는 해운대·광안리 바다, 그리고 밤의 황홀한 도시 야경을 선사하는 황령산과 도심 속 품으로 안아주는 시민공원까지. 극적인 조화를 선사합니다.
-                        </p>
-                    </div>
-                    <span class="text-xs font-bold text-mint-accent mt-8 tracking-widest uppercase flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span> OCEAN × FOREST × NIGHT VIEW
-                    </span>
-                </div>
-
-                <!-- 카드 2: 알찬 콘텐츠 -->
-                <div class="bg-white rounded-3xl p-8 shadow-[0_15px_35px_rgba(6,16,30,0.03)] border-2 border-slate-100 hover:border-mint/30 hover:shadow-[0_20px_40px_rgba(46,229,157,0.1)] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2">
-                    <div class="space-y-6">
-                        <div class="w-14 h-14 rounded-2xl bg-mint-soft flex items-center justify-center text-mint-accent text-2xl group-hover:bg-gradient-to-br group-hover:from-mint group-hover:to-mint-lime group-hover:text-navy-deep transition-all duration-300">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                        </div>
-                        <h3 class="font-title text-2xl font-bold text-navy-deep">알찬 콘텐츠</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed font-normal">
-                            단순한 코스 소개를 넘어 시간대별, 목적별 최적의 추천을 큐레이션합니다. 걷다가 들어가기 딱 좋은 단골 로컬 카페 정보, 숨은 조망 쉼터까지 세심히 다듬었습니다.
-                        </p>
-                    </div>
-                    <span class="text-xs font-bold text-mint-accent mt-8 tracking-widest uppercase flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span> DETAILED CURATION
-                    </span>
-                </div>
-
-                <!-- 카드 3: 실용성 -->
-                <div class="bg-white rounded-3xl p-8 shadow-[0_15px_35px_rgba(6,16,30,0.03)] border-2 border-slate-100 hover:border-mint/30 hover:shadow-[0_20px_40px_rgba(46,229,157,0.1)] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2">
-                    <div class="space-y-6">
-                        <div class="w-14 h-14 rounded-2xl bg-mint-soft flex items-center justify-center text-mint-accent text-2xl group-hover:bg-gradient-to-br group-hover:from-mint group-hover:to-mint-lime group-hover:text-navy-deep transition-all duration-300">
-                            <i class="fa-solid fa-shoe-prints"></i>
-                        </div>
-                        <h3 class="font-title text-2xl font-bold text-navy-deep">직관적 실용성</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed font-normal">
-                            낯선 여행자도, 매일 걷던 로컬들도 헷갈리지 않는 직관적이고 심플한 디자인 정보. 난이도, 예상 시간, 경로 정보를 최소한의 시각적 요소로 쉽고 스마트하게 전달합니다.
-                        </p>
-                    </div>
-                    <span class="text-xs font-bold text-mint-accent mt-8 tracking-widest uppercase flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span> HIGHLY PRAGMATIC
-                    </span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Course Detail Section (상세 - 코스 깊이 보기) -->
-    <section id="courses" class="py-24 bg-soft-white relative overflow-hidden wave-gradient-2">
-        <div class="max-w-6xl mx-auto px-6 md:px-12">
-            <!-- 섹션 헤더 -->
-            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-16 md:mb-24 gap-6">
-                <div class="space-y-4">
-                    <span class="text-xs font-extrabold tracking-widest text-mint-accent uppercase bg-mint-soft px-3 py-1.5 rounded-full font-sans">COURSE DETAILS</span>
-                    <h2 class="font-title text-3xl sm:text-4xl md:text-5xl text-navy-deep font-extrabold leading-tight">
-                        오감을 깨우는 네 가지 부산의 숨은 길
-                    </h2>
-                </div>
-                <p class="text-slate-500 max-w-sm font-normal text-sm md:text-base leading-relaxed">
-                    바쁜 걸음을 멈추고 벤치에 가만히 앉아보는 것 또한 훌륭한 산책의 일부입니다. 네 가지 코스의 고유한 분위기를 소개합니다.
-                </p>
-            </div>
-
-            <!-- 상세 리스트 (각 코스 카드화 - 해운대 -> 광안리 -> 황령산 -> 시민공원) -->
-            <div class="space-y-24">
-                
-                <!-- 코스 1: 해운대 해변 -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center course-card" id="card-haeundae">
-                    <div class="lg:col-span-6 relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] group">
-                        <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?q=80&w=1000&auto=format&fit=crop" 
-                             alt="Haeundae Beach" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                             onerror="this.src='https://placehold.co/800x600/0B192C/FFFFFF?text=Haeundae+Beach'">
-                        <div class="absolute top-5 left-5 bg-navy-deep/90 px-4 py-1.5 rounded-full text-xs font-bold text-mint-glow shadow-sm card-blur border border-mint/20">
-                            추천 시간대 : 일출 ~ 아침
-                        </div>
-                    </div>
-                    <div class="lg:col-span-6 space-y-6">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="bg-mint-soft text-mint-accent text-xs font-extrabold px-3 py-1 rounded-full">#활력_충전</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#도심_바다</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#사색_산책</span>
-                        </div>
-                        <h3 class="font-title text-3xl text-navy-deep font-extrabold">해운대 해변 코스</h3>
-                        <p class="text-slate-600 font-normal text-sm md:text-base leading-relaxed">
-                            끝없이 뻗어 나가는 백사장과 드넓은 태평양의 에너지를 동시에 맞이하는 경로입니다. 이른 아침, 수평선 뒤로 떠오르는 장엄한 붉은빛 해를 마주하며 하루의 첫 시작을 활기차게 채워보세요.
-                        </p>
-                        <!-- 정보 인포그래픽 -->
-                        <div class="grid grid-cols-3 gap-4 border-y border-slate-100 py-4 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">소요 시간</span>
-                                <span class="font-bold text-navy-deep text-base">약 1.5시간</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">총 거리</span>
-                                <span class="font-bold text-navy-deep text-base">약 3.2 km</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">난이도</span>
-                                <span class="font-bold text-mint-accent text-base">쉬움 (보통)</span>
-                            </div>
-                        </div>
-                        <!-- 로컬 팁 수집기 -->
-                        <div class="bg-white border-2 border-mint-soft p-5 rounded-2xl space-y-3 relative overflow-hidden">
-                            <div class="absolute right-0 top-0 w-24 h-24 bg-mint/5 rounded-full filter blur-xl"></div>
-                            <h4 class="text-xs font-extrabold text-mint-accent tracking-wider uppercase flex items-center gap-1.5">
-                                <i class="fa-regular fa-lightbulb text-mint-accent animate-bounce"></i> Local Tip
-                            </h4>
-                            <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside font-normal">
-                                <li>미포 선착장 옆 숨겨진 나무 데크길에서 마주하는 일출 뷰는 평생 잊지 못할 추억을 선사합니다.</li>
-                                <li>산책 후 달맞이길 초입에 위치한 한옥 카페에서 즐기는 따뜻한 마차 라떼는 숨겨진 필살기 코스.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 코스 2: 광안리 해변 -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center course-card" id="card-gwangalli">
-                    <div class="lg:col-span-6 lg:order-2 relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] group">
-                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?q=80&w=1000&auto=format&fit=crop" 
-                             alt="Gwangalli Bridge Night" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                             onerror="this.src='https://placehold.co/800x600/1E3E62/FFFFFF?text=Gwangalli+Night'">
-                        <div class="absolute top-5 left-5 bg-navy-deep/90 px-4 py-1.5 rounded-full text-xs font-bold text-mint-glow shadow-sm card-blur border border-mint/20">
-                            추천 시간대 : 해질녘 ~ 늦은 밤
-                        </div>
-                    </div>
-                    <div class="lg:col-span-6 lg:order-1 space-y-6">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="bg-mint-soft text-mint-accent text-xs font-extrabold px-3 py-1 rounded-full">#야경_로맨스</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#광안대교_불빛</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#로컬_맥주</span>
-                        </div>
-                        <h3 class="font-title text-3xl text-navy-deep font-extrabold">광안리 해안 로맨틱 코스</h3>
-                        <p class="text-slate-600 font-normal text-sm md:text-base leading-relaxed">
-                            광안대교가 선사하는 형형색색의 조명이 한 폭의 유화처럼 바다 위에 번지는 낭만 가득한 산책로입니다. 시원하게 불어오는 밤바람을 맞으며 어둠과 불빛이 수놓은 거리를 사랑하는 사람과 속삭이며 걸어보세요.
-                        </p>
-                        <!-- 정보 인포그래픽 -->
-                        <div class="grid grid-cols-3 gap-4 border-y border-slate-100 py-4 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">소요 시간</span>
-                                <span class="font-bold text-navy-deep text-base">약 1.0시간</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">총 거리</span>
-                                <span class="font-bold text-navy-deep text-base">약 2.5 km</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">난이도</span>
-                                <span class="font-bold text-mint-accent text-base">매우 쉬움</span>
-                            </div>
-                        </div>
-                        <!-- 로컬 팁 수집기 -->
-                        <div class="bg-white border-2 border-mint-soft p-5 rounded-2xl space-y-3 relative overflow-hidden">
-                            <div class="absolute right-0 top-0 w-24 h-24 bg-mint/5 rounded-full filter blur-xl"></div>
-                            <h4 class="text-xs font-extrabold text-mint-accent tracking-wider uppercase flex items-center gap-1.5">
-                                <i class="fa-regular fa-lightbulb text-mint-accent animate-bounce"></i> Local Tip
-                            </h4>
-                            <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside font-normal">
-                                <li>해질녘 남천동 방향에서 민락수변공원 방면으로 갈수록 광안대교의 원근감이 우아하게 살아납니다.</li>
-                                <li>민락 뒷골목 에스프레소 바에 잠시 들어가 에스프레소 콘파냐 한 잔으로 바다 감각을 리셋해보세요.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 코스 3: 황령산 전망대 (NEW!) -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center course-card" id="card-hwangryeong">
-                    <div class="lg:col-span-6 relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] group">
-                        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1000&auto=format&fit=crop" 
-                             alt="Hwangryeongsan Observatory Night View" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                             onerror="this.src='https://placehold.co/800x600/06101E/FFFFFF?text=Hwangryeongsan+Night+View'">
-                        <div class="absolute top-5 left-5 bg-navy-deep/90 px-4 py-1.5 rounded-full text-xs font-bold text-mint-glow shadow-sm card-blur border border-mint/20">
-                            추천 시간대 : 일몰 후 ~ 자정
-                        </div>
-                    </div>
-                    <div class="lg:col-span-6 space-y-6">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="bg-mint-soft text-mint-accent text-xs font-extrabold px-3 py-1 rounded-full">#도심_야경</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#황홀한_전망</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#은하수_바람</span>
-                        </div>
-                        <h3 class="font-title text-3xl text-navy-deep font-extrabold">황령산 전망대 은하수 코스</h3>
-                        <p class="text-slate-600 font-normal text-sm md:text-base leading-relaxed">
-                            부산의 수많은 산들 중에서도 도심과 밤바다, 광안대교를 동시에 입체적으로 내려다볼 수 있는 최고의 전망 산책로입니다. 어스름이 짙어질 때 봉수대 전망길을 걸으며, 발밑으로 쏟아지는 찬란한 빛의 바다를 감상해 보세요.
-                        </p>
-                        <!-- 정보 인포그래픽 -->
-                        <div class="grid grid-cols-3 gap-4 border-y border-slate-100 py-4 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">소요 시간</span>
-                                <span class="font-bold text-navy-deep text-base">약 2.0시간</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">총 거리</span>
-                                <span class="font-bold text-navy-deep text-base">약 3.5 km</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">난이도</span>
-                                <span class="font-bold text-mint-accent text-base">보통 (오르막)</span>
-                            </div>
-                        </div>
-                        <!-- 로컬 팁 수집기 -->
-                        <div class="bg-white border-2 border-mint-soft p-5 rounded-2xl space-y-3 relative overflow-hidden">
-                            <div class="absolute right-0 top-0 w-24 h-24 bg-mint/5 rounded-full filter blur-xl"></div>
-                            <h4 class="text-xs font-extrabold text-mint-accent tracking-wider uppercase flex items-center gap-1.5">
-                                <i class="fa-regular fa-lightbulb text-mint-accent animate-bounce"></i> Local Tip
-                            </h4>
-                            <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside font-normal">
-                                <li>봉수대로 향하는 나무 데크길 중간 전망 쉼터가 서면 시내와 영도 바다를 모두 포착할 수 있는 가장 완벽한 프레임 스팟입니다.</li>
-                                <li>산 정상의 바람이 꽤 쌀쌀하니, 보온 텀블러에 따뜻한 드립 커피를 담아 올라가면 로컬다운 낭만이 극대화됩니다.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 코스 4: 시민공원 -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center course-card" id="card-citizens">
-                    <div class="lg:col-span-6 lg:order-2 relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] group">
-                        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1000&auto=format&fit=crop" 
-                             alt="Busan Citizens Park" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                             onerror="this.src='https://placehold.co/800x600/4E6C50/FFFFFF?text=Citizens+Park'">
-                        <div class="absolute top-5 left-5 bg-navy-deep/90 px-4 py-1.5 rounded-full text-xs font-bold text-mint-glow shadow-sm card-blur border border-mint/20">
-                            추천 시간대 : 정오 ~ 화창한 낮
-                        </div>
-                    </div>
-                    <div class="lg:col-span-6 lg:order-1 space-y-6">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="bg-mint-soft text-mint-accent text-xs font-extrabold px-3 py-1 rounded-full">#잔디밭_휴식</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#메타세쿼이아</span>
-                            <span class="bg-slate-100 text-slate-600 text-xs px-3 py-1 rounded-full">#도심_오아시스</span>
-                        </div>
-                        <h3 class="font-title text-3xl text-navy-deep font-extrabold">부산 시민공원 초록 오아시스</h3>
-                        <p class="text-slate-600 font-normal text-sm md:text-base leading-relaxed">
-                            옛 하야리아 미군 부대 부지가 시민들의 품으로 돌아와 거대한 녹색 오아시스가 되었습니다. 끝없이 넓은 잔디광장 한편에 돗자리를 펴고 누워 나뭇잎 사이로 부서져 내리는 따스한 햇살을 받아보세요.
-                        </p>
-                        <!-- 정보 인포그래픽 -->
-                        <div class="grid grid-cols-3 gap-4 border-y border-slate-100 py-4 text-center">
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">소요 시간</span>
-                                <span class="font-bold text-navy-deep text-base">약 2.0 시간</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">총 거리</span>
-                                <span class="font-bold text-navy-deep text-base">약 4.0 km</span>
-                            </div>
-                            <div>
-                                <span class="block text-xs text-slate-400 mb-1">난이도</span>
-                                <span class="font-bold text-mint-accent text-base">가볍고 안전함</span>
-                            </div>
-                        </div>
-                        <!-- 로컬 팁 수집기 -->
-                        <div class="bg-white border-2 border-mint-soft p-5 rounded-2xl space-y-3 relative overflow-hidden">
-                            <div class="absolute right-0 top-0 w-24 h-24 bg-mint/5 rounded-full filter blur-xl"></div>
-                            <h4 class="text-xs font-extrabold text-mint-accent tracking-wider uppercase flex items-center gap-1.5">
-                                <i class="fa-regular fa-lightbulb text-mint-accent animate-bounce"></i> Local Tip
-                            </h4>
-                            <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside font-normal">
-                                <li>'기억의 숲길' 메타세쿼이아 산책로는 한낮의 뜨거운 햇볕도 울창하게 완벽 차단해 줍니다.</li>
-                                <li>남문 부근 드넓은 하야리아 잔디광장에서 나 홀로 무선 헤드폰을 끼고 듣는 플레이리스트 산책은 치유 그 자체.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Course Matcher Section (취향별 코스 매칭) -->
-    <section id="matcher" class="py-24 bg-navy-deep text-white relative">
-        <!-- 배경 디테일 원 -->
-        <div class="absolute right-0 top-0 w-80 h-80 rounded-full bg-mint/10 filter blur-3xl pointer-events-none"></div>
-        <div class="absolute left-0 bottom-0 w-80 h-80 rounded-full bg-navy-dark/40 filter blur-3xl pointer-events-none"></div>
-        
-        <div class="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
-                <span class="text-xs font-extrabold tracking-widest text-mint uppercase bg-white/5 border border-white/10 px-3 py-1.5 rounded-full font-sans">MOOD MATCHER</span>
-                <h2 class="font-title text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">오늘 어떤 기분으로 걷고 싶나요?</h2>
-                <p class="text-white/70 font-normal text-xs sm:text-sm md:text-base">마음에 와닿는 감정을 하나 골라보세요. 완벽한 청량 가이드 경로를 안내해 드릴게요.</p>
-            </div>
-
-            <!-- 기분 키워드 선택 버튼 영역 -->
-            <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-4xl mx-auto mb-16" id="mood-selectors">
-                <button data-target="haeundae" class="mood-btn border border-white/10 hover:border-mint/50 px-5 md:px-7 py-3.5 rounded-full text-xs md:text-sm tracking-wider font-semibold transition-all bg-white/5 flex items-center gap-2 group">
-                    <i class="fa-solid fa-sun text-mint group-hover:animate-bounce"></i> #활력_충전
-                </button>
-                <button data-target="gwangalli" class="mood-btn border border-white/10 hover:border-mint/50 px-5 md:px-7 py-3.5 rounded-full text-xs md:text-sm tracking-wider font-semibold transition-all bg-white/5 flex items-center gap-2 group">
-                    <i class="fa-regular fa-moon text-mint group-hover:animate-bounce"></i> #야경_로맨스
-                </button>
-                <button data-target="hwangryeong" class="mood-btn border border-white/10 hover:border-mint/50 px-5 md:px-7 py-3.5 rounded-full text-xs md:text-sm tracking-wider font-semibold transition-all bg-white/5 flex items-center gap-2 group">
-                    <i class="fa-solid fa-cloud-showers-water text-mint group-hover:animate-bounce"></i> #도심_야경
-                </button>
-                <button data-target="citizens" class="mood-btn border border-white/10 hover:border-mint/50 px-5 md:px-7 py-3.5 rounded-full text-xs md:text-sm tracking-wider font-semibold transition-all bg-white/5 flex items-center gap-2 group">
-                    <i class="fa-solid fa-tree text-mint group-hover:animate-bounce"></i> #잔디밭_휴식
-                </button>
-            </div>
-
-            <!-- 추천 매칭 결과 패널 -->
-            <div id="matching-result" class="bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 transition-all duration-500 scale-95 opacity-0 h-0 overflow-hidden pointer-events-none">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" id="result-content">
-                    <!-- 스크립트에서 컨텐츠 동적 생성 -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA (마무리 - 행동 유도) -->
-    <section class="py-24 bg-gradient-to-t from-navy-deep to-navy-dark text-white relative">
-        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-mint via-navy-deep to-navy-deep pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center space-y-10 relative z-10">
-            <span class="text-xs font-extrabold tracking-widest text-mint uppercase bg-white/5 border border-white/10 px-4 py-2 rounded-full font-sans">START WALKING NOW</span>
-            <h2 class="font-title text-3xl sm:text-4xl md:text-6xl font-extrabold leading-tight">
-                준비물은 가벼운 신발 하나뿐,<br>오늘 당신을 부르는 길을 만나보세요
-            </h2>
-            <p class="text-white/70 font-normal max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-                부산의 아름다운 바람이 당신의 지친 마음을 어루만질 수 있도록, 스마트폰에 산책 코스 지도를 손쉽게 저장하고 언제든 출발하세요.
-            </p>
-            
-            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-                <button onclick="saveCourse()" class="bg-gradient-to-r from-mint to-mint-lime hover:from-mint-lime hover:to-mint text-navy-deep font-extrabold px-8 py-4 rounded-full text-sm tracking-wider transition-all shadow-[0_0_30px_rgba(46,229,157,0.3)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(46,229,157,0.6)] active:translate-y-0 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-download"></i> 내 폰에 코스 전체지도 저장하기
-                </button>
-                <a href="#matcher" class="border-2 border-white/20 hover:border-mint hover:bg-white/5 text-white font-bold px-8 py-4 rounded-full text-sm tracking-wider transition-all flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-rotate"></i> 다시 맞춤 코스 찾기
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-navy-deep text-white border-2 border-mint/40 px-6 py-4 rounded-3xl shadow-[0_15px_40px_rgba(46,229,157,0.2)] flex items-center gap-4 transition-all duration-300 translate-y-20 opacity-0 z-50">
-        <div class="w-9 h-9 rounded-full bg-gradient-to-r from-mint to-mint-lime flex items-center justify-center text-navy-deep text-sm font-extrabold">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <div class="text-left">
-            <p class="text-xs font-bold text-white/90">부산 산책 코스 저장 완료</p>
-            <p class="text-[10px] text-white/60">오프라인에서도 볼 수 있는 지도가 저장되었습니다.</p>
-        </div>
+      <!-- 모바일 메뉴 토글 -->
+      <button id="menu-btn" class="md:hidden text-white hover:text-brand-mint focus:outline-none" aria-label="메뉴 열기">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="bg-navy-deep border-t border-white/5 py-12 text-white/50 text-xs tracking-wider">
-        <div class="max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-3">
-                <span class="font-title text-white font-black text-lg tracking-widest">부산, 산책</span>
-                <span class="text-white/20">|</span>
-                <p class="font-normal text-white/70">가장 부산다운 풍경을 즐기는 여행 플랫폼</p>
-            </div>
-            <div class="flex space-x-6 text-white/50 font-semibold font-sans">
-                <a href="#" class="hover:text-mint transition-colors">이용 약관</a>
-                <a href="#" class="hover:text-mint transition-colors">개인정보 처리방침</a>
-                <a href="#" class="hover:text-mint transition-colors">기획안 보기</a>
-            </div>
-        </div>
-        <div class="max-w-6xl mx-auto px-6 md:px-12 mt-8 pt-8 border-t border-white/5 text-center md:text-left">
-            <p class="text-[10px] text-white/30">© 2026 Busan Walk. All rights reserved. Crafted with kinetic waves & vibrant coastal wind.</p>
-        </div>
-    </footer>
+    <!-- 모바일 드롭다운 메뉴 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-navy border-b border-white/10 px-6 py-4 space-y-3">
+      <a href="#about" class="block text-gray-300 hover:text-brand-mint py-2">매력 포인트</a>
+      <a href="#haeundae" class="block text-gray-300 hover:text-brand-mint py-2">해운대·동백섬</a>
+      <a href="#gwanganli" class="block text-gray-300 hover:text-brand-mint py-2">광안리·황령산</a>
+      <a href="#park" class="block text-gray-300 hover:text-brand-mint py-2">시민공원</a>
+      <a href="#cta" class="block text-center py-3 bg-brand-olive text-white rounded-lg font-semibold">코스 저장하기</a>
+    </div>
+  </nav>
 
-    <!-- JavaScript Section -->
-    <script>
-        // 스크롤 시 내비게이션 바 배경 변화
-        const mainNav = document.getElementById('main-nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                mainNav.classList.remove('bg-transparent', 'py-6');
-                mainNav.classList.add('bg-navy-deep/95', 'py-4', 'shadow-lg', 'backdrop-blur-md', 'border-b', 'border-white/5');
-            } else {
-                mainNav.classList.remove('bg-navy-deep/95', 'py-4', 'shadow-lg', 'backdrop-blur-md', 'border-b', 'border-white/5');
-                mainNav.classList.add('bg-transparent', 'py-6');
-            }
-        });
+  <!-- 1단계: 히어로 영역 (도입부) -->
+  <header class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-navy text-white pt-20">
+    <!-- 배경 이미지 / 영상 대체 비주얼 레이어 -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-cover bg-center opacity-40 scale-105 transition-transform duration-[10000ms] hover:scale-100" 
+           style="background-image: url('https://images.unsplash.com/photo-1570191848419-f53eb90558ca?auto=format&fit=crop&q=80&w=1920');">
+      </div>
+      <div class="absolute inset-0 hero-gradient"></div>
+    </div>
 
-        // 모바일 사이드 토글 메뉴
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+    <!-- 히어로 콘텐츠 -->
+    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-8 backdrop-blur-sm animate-fade-in">
+        <span class="w-2 h-2 rounded-full bg-brand-mint animate-pulse"></span>
+        <span class="text-xs md:text-sm font-semibold tracking-widest text-brand-lime">BUSAN PROMENADE</span>
+      </div>
+      
+      <!-- 메인 캐치프레이즈 -->
+      <h1 class="font-title text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-tight md:leading-normal mb-6">
+        바다에서 산까지,<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-mint to-brand-lime">기분 따라 걷는</span> 부산 산책
+      </h1>
+      
+      <!-- 서브 캐치프레이즈 -->
+      <p class="font-title text-xl md:text-3xl text-gray-200 font-light mb-12">
+        "정해진 루트는 없으니까."
+      </p>
+
+      <p class="text-gray-300 max-w-xl mx-auto text-base md:text-lg font-light leading-relaxed mb-12">
+        가장 부산다운 풍경 속으로 걸어 들어가는 시간.<br>
+        화려한 해안 도로의 불빛부터 고요한 숲속 흙길까지 오롯이 느껴보세요.
+      </p>
+
+      <!-- 액션 버튼 -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#about" class="px-8 py-4 bg-brand-mint text-brand-navy font-bold rounded-full shadow-lg shadow-brand-mint/20 hover:bg-brand-lime hover:shadow-brand-lime/30 transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto text-center">
+          산책 시작하기
+        </a>
+        <a href="#cta" class="px-8 py-4 border border-white/30 text-white font-medium rounded-full hover:bg-white/10 transition-all duration-300 w-full sm:w-auto text-center">
+          지도로 코스 저장
+        </a>
+      </div>
+    </div>
+
+    <!-- 스크롤 유도 다운 에로우 -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+      <a href="#about" aria-label="다음 섹션으로 이동">
+        <svg class="w-6 h-6 text-brand-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- 2단계: 소개 및 매력 포인트 영역 -->
+  <section id="about" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- 섹션 헤더 -->
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="text-sm font-bold tracking-widest text-brand-olive uppercase block mb-3">Brand Story</span>
+        <h2 class="font-title text-3xl md:text-5xl font-extrabold text-brand-navy mb-6 leading-tight">
+          화려한 도심과<br class="sm:hidden"> 푸른 자연이 공존하는 곳
+        </h2>
+        <div class="w-16 h-1 bg-brand-olive mx-auto mb-6"></div>
+        <p class="text-lg text-gray-600 font-light leading-relaxed">
+          부산의 길은 매 순간 표정을 바꿉니다. 파도가 부서지는 백사장 옆을 걷다가도, 어느새 피톤치드 가득한 소나무 울창한 숲길에 닿게 됩니다. 정해진 코스 없이 오직 발걸음이 이끄는 대로, 가장 감각적이고 잔잔한 부산을 만나보세요.
+        </p>
+      </div>
+
+      <!-- 매력 포인트 3가지 Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
         
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        <!-- 포인트 1 -->
+        <div class="bg-brand-bgLight p-8 md:p-10 rounded-2xl border border-gray-100 hover:shadow-xl hover:shadow-brand-olive/5 transition-all duration-300 group">
+          <div class="w-14 h-14 rounded-2xl bg-brand-olive/10 flex items-center justify-center mb-8 group-hover:bg-brand-olive transition-all duration-300">
+            <svg class="w-7 h-7 text-brand-olive group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5a3 3 0 003-3V6.7m-2 9l-3 3m0 0l-3-3m3 3V10"></path>
+            </svg>
+          </div>
+          <h3 class="font-title text-2xl font-bold text-brand-navy mb-4">대비되는 매력</h3>
+          <p class="text-gray-600 leading-relaxed font-light">
+            화려한 도심의 스카이라인 바다와 싱그러운 녹음 가득한 숲길을 한눈에 비교하고 교차하며 걷는 부산만의 독특한 이중 매력을 선사합니다.
+          </p>
+        </div>
 
-        const mobileLinks = mobileMenu.querySelectorAll('a');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
+        <!-- 포인트 2 -->
+        <div class="bg-brand-bgLight p-8 md:p-10 rounded-2xl border border-gray-100 hover:shadow-xl hover:shadow-brand-olive/5 transition-all duration-300 group">
+          <div class="w-14 h-14 rounded-2xl bg-brand-olive/10 flex items-center justify-center mb-8 group-hover:bg-brand-olive transition-all duration-300">
+            <svg class="w-7 h-7 text-brand-olive group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h3 class="font-title text-2xl font-bold text-brand-navy mb-4">알찬 콘텐츠</h3>
+          <p class="text-gray-600 leading-relaxed font-light">
+            단순히 걷기만 하는 지루한 루트가 아닙니다. 시간별 맞춤 추천 큐레이션과 감성 카페, 숨겨진 뷰포인트 등 로컬 크루의 꿀팁이 결합되었습니다.
+          </p>
+        </div>
 
-        // 토스트 알림 작동
-        function saveCourse() {
-            const toast = document.getElementById('toast');
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            toast.classList.add('translate-y-0', 'opacity-100');
+        <!-- 포인트 3 -->
+        <div class="bg-brand-bgLight p-8 md:p-10 rounded-2xl border border-gray-100 hover:shadow-xl hover:shadow-brand-olive/5 transition-all duration-300 group">
+          <div class="w-14 h-14 rounded-2xl bg-brand-olive/10 flex items-center justify-center mb-8 group-hover:bg-brand-olive transition-all duration-300">
+            <svg class="w-7 h-7 text-brand-olive group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+            </svg>
+          </div>
+          <h3 class="font-title text-2xl font-bold text-brand-navy mb-4">실용적인 정보</h3>
+          <p class="text-gray-600 leading-relaxed font-light">
+            복잡한 길 찾기는 그만. 소요 시간, 난이도, 고도 변화, 휠체어/유모차 진입 가능 여부까지 걷는 사람의 눈높이에 맞춘 세심한 가이드를 제공합니다.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 키워드 매칭 필터 (스토리텔링 2단계) -->
+  <section class="py-16 bg-brand-navy text-white border-y border-white/5">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h3 class="font-title text-2xl md:text-3xl font-bold mb-8">지금 나에게 딱 맞는 산책 매칭</h3>
+      
+      <!-- 해시태그 기반 빠른 코스 탐색 버튼들 -->
+      <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-3xl mx-auto">
+        <button onclick="filterCourse('ocean')" class="filter-btn px-6 py-3 rounded-full border border-white/10 hover:border-brand-mint text-sm font-medium transition-all duration-300 bg-white/5 hover:bg-brand-mint hover:text-brand-navy active:scale-95">
+          # 탁트인바다코스 🌊
+        </button>
+        <button onclick="filterCourse('forest')" class="filter-btn px-6 py-3 rounded-full border border-white/10 hover:border-brand-mint text-sm font-medium transition-all duration-300 bg-white/5 hover:bg-brand-mint hover:text-brand-navy active:scale-95">
+          # 울창한숲속길 🌲
+        </button>
+        <button onclick="filterCourse('night')" class="filter-btn px-6 py-3 rounded-full border border-white/10 hover:border-brand-mint text-sm font-medium transition-all duration-300 bg-white/5 hover:bg-brand-mint hover:text-brand-navy active:scale-95">
+          # 오색빛도시야경 🌌
+        </button>
+        <button onclick="filterCourse('flat')" class="filter-btn px-6 py-3 rounded-full border border-white/10 hover:border-brand-mint text-sm font-medium transition-all duration-300 bg-white/5 hover:bg-brand-mint hover:text-brand-navy active:scale-95">
+          # 평탄한힐링가족길 👨‍👩‍👧‍👦
+        </button>
+      </div>
+
+      <!-- 선택된 필터 결과 피드백 전용 팝업 -->
+      <div id="filter-result-toast" class="mt-8 text-brand-mint font-medium h-6 opacity-0 transition-opacity duration-300">
+        해당 태그에 매칭되는 코스가 아래에 하이라이트 되었습니다.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3단계: 상세 코스 소개 (해운대 동백섬 / 광안리 황령산 / 시민공원) -->
+  
+  <!-- 1. 해운대 (+동백섬) -->
+  <section id="haeundae" class="py-24 bg-brand-bgLight course-section transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- 코스 비주얼 -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl group aspect-video">
+            <div class="absolute inset-0 bg-brand-navy/10 z-10 group-hover:bg-transparent transition-colors duration-300"></div>
+            <img src="https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=1200" 
+                 alt="해운대 동백섬 산책로 전경" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <!-- 코스 고유 태그 -->
+            <div class="absolute top-6 left-6 z-20 flex gap-2">
+              <span class="px-3 py-1 bg-brand-navy text-brand-mint text-xs font-semibold rounded-full uppercase tracking-wider">Ocean</span>
+              <span class="px-3 py-1 bg-brand-olive text-white text-xs font-semibold rounded-full uppercase tracking-wider">Best</span>
+            </div>
+          </div>
+          <!-- 보조 이미지 슬라이드 형태 배열 -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl overflow-hidden h-32">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600" alt="동백섬 등대 뷰포인트" class="w-full h-full object-cover">
+            </div>
+            <div class="rounded-2xl overflow-hidden h-32">
+              <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=600" alt="해운대 백사장 일몰" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+        <!-- 코스 설명 콘텐츠 -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-brand-olive font-bold text-sm tracking-wider uppercase">Course 01</span>
+          <h3 class="font-title text-3xl md:text-4xl font-extrabold text-brand-navy leading-tight">
+            파도 소리와 소나무 향의 조화,<br>해운대 & 동백섬 코스
+          </h3>
+          <p class="text-gray-600 leading-relaxed font-light">
+            드넓은 해운대 해변의 시원한 파도 소리를 들으며 출발하여, 오랜 수령의 울창한 송림이 자생하는 동백섬 둘레길로 자연스럽게 이어지는 환상적인 해안 루트입니다. 황홀한 마린시티의 마천루 뷰와 옛 정취 가득한 누리마루 APEC 하우스가 자아내는 대조적인 풍경을 감상할 수 있습니다.
+          </p>
+
+          <!-- 코스 세부 메타 정보 -->
+          <div class="grid grid-cols-3 gap-4 py-4 border-y border-gray-200">
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">소요 시간</span>
+              <span class="font-title font-bold text-brand-navy">약 1시간</span>
+            </div>
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">총 거리</span>
+              <span class="font-title font-bold text-brand-navy">3.5 km</span>
+            </div>
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">난이도</span>
+              <span class="font-title font-bold text-brand-olive">쉬움 (완만)</span>
+            </div>
+          </div>
+
+          <!-- 로컬 정보 및 팁 박스 -->
+          <div class="bg-brand-navy text-white p-6 rounded-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-brand-olive/20 rounded-full blur-xl"></div>
+            <div class="flex items-start gap-4">
+              <div class="text-brand-mint text-xl font-bold">💡</div>
+              <div>
+                <h4 class="font-title text-base font-semibold text-brand-mint mb-1">로컬이 알려주는 시크릿 뷰포인트</h4>
+                <p class="text-xs text-gray-300 leading-relaxed font-light">
+                  해운대 해수욕장 끝자락에서 미포 방면 철길로 꺾어지는 '블루라인파크 산책로'까지 연계해보세요. 해가 질 무렵 바다 위로 지는 붉은 석양을 가로지르는 해변열차와 바다를 한눈에 가장 낭만적으로 관찰할 수 있는 히든 플레이스입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 광안리, 황령산 전망대 (야경) -->
+  <section id="gwanganli" class="py-24 bg-brand-navy text-white course-section transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- 코스 설명 콘텐츠 (모바일 레이아웃 일치를 위해 순서 배정) -->
+        <div class="lg:col-span-5 space-y-6 lg:order-1 order-2">
+          <span class="text-brand-mint font-bold text-sm tracking-wider uppercase">Course 02</span>
+          <h3 class="font-title text-3xl md:text-4xl font-extrabold leading-tight">
+            오색 찬란한 불빛들의 향연,<br>광안리 & 황령산 야경 코스
+          </h3>
+          <p class="text-gray-300 leading-relaxed font-light">
+            은은한 달빛 아래 파도를 맞으며 걷는 광안리 수변공원부터 시작해, 부산 전역의 화려한 스카이라인을 입체적으로 내려다볼 수 있는 황령산 전망대까지 연결되는 어반 나이트 워크 코스입니다. 해 질 녘 광안대교의 점등 릴레이를 감상하며 불을 밝히는 도시의 야경을 마주해 보세요.
+          </p>
+
+          <!-- 코스 세부 메타 정보 -->
+          <div class="grid grid-cols-3 gap-4 py-4 border-y border-white/10">
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">소요 시간</span>
+              <span class="font-title font-bold text-brand-mint">약 1.5시간</span>
+            </div>
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">총 거리</span>
+              <span class="font-title font-bold text-white">4.2 km</span>
+            </div>
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">난이도</span>
+              <span class="font-title font-bold text-brand-lime">보통 (오르막)</span>
+            </div>
+          </div>
+
+          <!-- 로컬 정보 및 팁 박스 -->
+          <div class="bg-white/5 border border-white/10 text-white p-6 rounded-2xl relative overflow-hidden">
+            <div class="flex items-start gap-4">
+              <div class="text-brand-lime text-xl font-bold">☕️</div>
+              <div>
+                <h4 class="font-title text-base font-semibold text-brand-lime mb-1">야간 산책 크루의 최애 감성 카페 코스</h4>
+                <p class="text-xs text-gray-300 leading-relaxed font-light">
+                  광안대교 끝자락 민락수변공원 방면에 밀집한 통유리 카페들에서 걷기 전 따뜻한 드립 커피 한 잔을 테이크아웃 하세요. 선선한 저녁 바닷바람과 함께 손끝에서 피어오르는 커피 향은 야간 산책의 몰입감을 극대화해 줍니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 코스 비주얼 -->
+        <div class="lg:col-span-7 space-y-4 lg:order-2 order-1">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl group aspect-video">
+            <div class="absolute inset-0 bg-brand-navy/20 z-10 group-hover:bg-transparent transition-colors duration-300"></div>
+            <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&q=80&w=1200" 
+                 alt="광안대교 다채로운 야경" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <!-- 코스 고유 태그 -->
+            <div class="absolute top-6 left-6 z-20 flex gap-2">
+              <span class="px-3 py-1 bg-brand-mint text-brand-navy text-xs font-semibold rounded-full uppercase tracking-wider">Night View</span>
+              <span class="px-3 py-1 bg-brand-lime text-brand-navy text-xs font-semibold rounded-full uppercase tracking-wider">Romantic</span>
+            </div>
+          </div>
+          <!-- 보조 이미지 슬라이드 -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl overflow-hidden h-32">
+              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=600" alt="황령산 전망대 야경 전경" class="w-full h-full object-cover">
+            </div>
+            <div class="rounded-2xl overflow-hidden h-32">
+              <img src="https://images.unsplash.com/photo-1513407030348-c983a97b98d8?auto=format&fit=crop&q=80&w=600" alt="광안리 해변 미디어 파사드" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 시민공원 -->
+  <section id="park" class="py-24 bg-white course-section transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- 코스 비주얼 -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl group aspect-video">
+            <div class="absolute inset-0 bg-brand-navy/10 z-10 group-hover:bg-transparent transition-colors duration-300"></div>
+            <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1200" 
+                 alt="싱그러운 초록이 가득한 도심 공원 전경" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            <!-- 코스 고유 태그 -->
+            <div class="absolute top-6 left-6 z-20 flex gap-2">
+              <span class="px-3 py-1 bg-brand-olive text-white text-xs font-semibold rounded-full uppercase tracking-wider">Forest & Park</span>
+              <span class="px-3 py-1 bg-brand-mint text-brand-navy text-xs font-semibold rounded-full uppercase tracking-wider">Healing</span>
+            </div>
+          </div>
+          <!-- 보조 이미지 슬라이드 -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl overflow-hidden h-32">
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=600" alt="공원의 푸른 잔디밭" class="w-full h-full object-cover">
+            </div>
+            <div class="rounded-2xl overflow-hidden h-32">
+              <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=600" alt="울창한 가로수 터널길" class="w-full h-full object-cover">
+            </div>
+          </div>
+        </div>
+
+        <!-- 코스 설명 콘텐츠 -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-brand-olive font-bold text-sm tracking-wider uppercase">Course 03</span>
+          <h3 class="font-title text-3xl md:text-4xl font-extrabold text-brand-navy leading-tight">
+            도심 속 드넓은 초록 쉼터,<br>부산 시민공원 피크닉 코스
+          </h3>
+          <p class="text-gray-600 leading-relaxed font-light">
+            옛 미군 부대 부지가 기억의 흐름을 간직한 채 시민들의 울창한 초록 휴식처로 거듭난 대형 도심 공원 산책 코스입니다. 거대한 잔디 광장을 중심으로 뻗어 있는 메타세콰이어 길, 시원한 물줄기가 떨어지는 분수광장, 인공 하천을 품고 있어 유모차나 휠체어와 함께하는 가족 단위 휴식을 최고의 한적한 가치로 선사합니다.
+          </p>
+
+          <!-- 코스 세부 메타 정보 -->
+          <div class="grid grid-cols-3 gap-4 py-4 border-y border-gray-200">
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">소요 시간</span>
+              <span class="font-title font-bold text-brand-navy">약 1.2시간</span>
+            </div>
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">총 거리</span>
+              <span class="font-title font-bold text-brand-navy">2.8 km</span>
+            </div>
+            <div>
+              <span class="block text-xs text-gray-400 mb-1">난이도</span>
+              <span class="font-title font-bold text-brand-olive">매우 쉬움 (완전 평탄)</span>
+            </div>
+          </div>
+
+          <!-- 로컬 정보 및 팁 박스 -->
+          <div class="bg-brand-bgLight border border-gray-200 text-brand-navy p-6 rounded-2xl relative overflow-hidden">
+            <div class="flex items-start gap-4">
+              <div class="text-brand-olive text-xl font-bold">🌳</div>
+              <div>
+                <h4 class="font-title text-base font-semibold text-brand-olive mb-1">최고의 한적한 멍 때리기 스팟</h4>
+                <p class="text-xs text-gray-600 leading-relaxed font-light">
+                  북문 뒤편에 위치한 '전포천' 목재 덱 로드 옆 그늘막 아래 평상은 오전 시간대에 가장 고요합니다. 졸졸 흐르는 개울물 소리를 들으며 한적하게 책을 읽거나 명상을 즐길 수 있는 숨은 파라다이스 같은 휴식 지점입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6단계: 지도 및 탐색 인터랙티브 허브 (디테일 정보 강화) -->
+  <section class="py-24 bg-brand-navy text-white relative overflow-hidden">
+    <!-- 장식용 기하학 패턴 배경 -->
+    <div class="absolute -right-1/4 -bottom-1/4 w-[600px] h-[600px] bg-brand-olive/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute -left-1/4 -top-1/4 w-[600px] h-[600px] bg-brand-mint/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-brand-mint font-semibold text-sm tracking-widest uppercase block mb-3">Promenade Map</span>
+        <h2 class="font-title text-3xl md:text-5xl font-extrabold mb-4">내 손안의 부산 도보 가이드</h2>
+        <p class="text-gray-300 font-light">
+          코스 세부 동선과 주요 체크포인트를 터치하여 자세히 탐색해 보세요.
+        </p>
+      </div>
+
+      <div class="bg-brand-cardBg border border-white/10 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-12">
+        <!-- 커스텀 지도 그래픽 영역 (SVG 아트워크로 지도와 최적 동선 인터랙티브 구현) -->
+        <div class="lg:col-span-8 p-6 bg-[#132237] relative flex flex-col justify-between min-h-[400px]">
+          <div class="flex items-center justify-between">
+            <span class="text-xs bg-white/10 px-3 py-1.5 rounded-full text-brand-mint font-medium">실시간 동선 모식도</span>
+            <span class="text-xs text-gray-400">※ 상징적 루트 레이아웃</span>
+          </div>
+
+          <!-- 인터랙티브 SVG 맵 가이드 -->
+          <div class="my-auto py-8">
+            <svg class="w-full max-w-lg mx-auto" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- 배경 격자선 -->
+              <path d="M0 50 H500 M0 100 H500 M0 150 H500 M0 200 H500 M0 250 H500" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+              <path d="M100 0 V300 M200 0 V300 M300 0 V300 M400 0 V300" stroke="white" stroke-opacity="0.03" stroke-width="1"/>
+
+              <!-- 바다 영역 상징 -->
+              <path d="M50 250 C120 220, 200 270, 320 230 C420 200, 480 250, 500 220" stroke="#4FFFB0" stroke-opacity="0.2" stroke-width="4" stroke-dasharray="5 5"/>
+
+              <!-- 해운대 동백섬 루트 (Orange/Mint Line) -->
+              <path id="path-haeundae" d="M380 220 C400 180, 440 180, 470 190" stroke="#4FFFB0" stroke-width="4" class="transition-all duration-500 opacity-60" stroke-linecap="round"/>
+              
+              <!-- 광안리 황령산 루트 (Blue/Pink Line) -->
+              <path id="path-gwanganli" d="M220 230 C200 180, 150 140, 180 100" stroke="#D2FF24" stroke-width="4" class="transition-all duration-500 opacity-60" stroke-linecap="round"/>
+
+              <!-- 시민공원 루트 (Green Line) -->
+              <path id="path-park" d="M80 120 C120 120, 140 80, 110 50" stroke="#556B2F" stroke-width="4" class="transition-all duration-500 opacity-60" stroke-linecap="round"/>
+
+              <!-- 포인트 인터랙티브 써클들 -->
+              <!-- 해운대 -->
+              <g class="cursor-pointer" onclick="selectMapSpot('haeundae')">
+                <circle cx="470" cy="190" r="16" fill="#4FFFB0" fill-opacity="0.2"/>
+                <circle cx="470" cy="190" r="6" fill="#4FFFB0"/>
+                <text x="470" y="165" fill="#4FFFB0" font-size="11" font-weight="bold" text-anchor="middle" class="font-hahmlet">해운대</text>
+              </g>
+
+              <!-- 광안리 / 황령산 -->
+              <g class="cursor-pointer" onclick="selectMapSpot('gwanganli')">
+                <circle cx="180" cy="100" r="16" fill="#D2FF24" fill-opacity="0.2"/>
+                <circle cx="180" cy="100" r="6" fill="#D2FF24"/>
+                <text x="180" y="75" fill="#D2FF24" font-size="11" font-weight="bold" text-anchor="middle" class="font-hahmlet">황령산·광안리</text>
+              </g>
+
+              <!-- 시민공원 -->
+              <g class="cursor-pointer" onclick="selectMapSpot('park')">
+                <circle cx="110" cy="50" r="16" fill="#556B2F" fill-opacity="0.2"/>
+                <circle cx="110" cy="50" r="6" fill="#556B2F"/>
+                <text x="110" y="25" fill="#FFF" font-size="11" font-weight="bold" text-anchor="middle" class="font-hahmlet">시민공원</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="text-xs text-gray-400 flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-brand-lime"></span>
+            지도의 마커를 터치하여 연계 세부 장소 정보를 열람할 수 있습니다.
+          </div>
+        </div>
+
+        <!-- 지도 상세 패널 (탭) -->
+        <div class="lg:col-span-4 p-8 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-white/10">
+          <div id="map-panel-content">
+            <span class="text-xs font-semibold text-brand-mint tracking-widest block mb-1">SELECTED POINT</span>
+            <h4 id="spot-title" class="font-title text-2xl font-bold text-white mb-4">지도의 포인트를 터치하세요</h4>
             
-            setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
+            <div id="spot-desc-wrapper" class="space-y-4 text-sm text-gray-300 font-light leading-relaxed">
+              <p>마커를 터치하시면 실시간 로컬 추천 맛집, 제휴 카페, 화장실 위치 정보 등을 즉시 매핑해서 보실 수 있습니다.</p>
+              <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                <span class="text-brand-lime font-bold block mb-1">추천 플레이스 미리보기</span>
+                - 동백섬 구름다리 전망대<br>
+                - 광안리 민락수변공원 청년 푸드트럭 야시장<br>
+                - 시민공원 내 뽀로로 도서관 산책 테크길
+              </div>
+            </div>
+          </div>
 
-        // --- 취향별 코스 매칭 인터랙티브 시나리오 (해운대 -> 광안리 -> 황령산 -> 시민공원) ---
-        const courseData = {
-            haeundae: {
-                title: "해운대 오션 브리즈 코스",
-                intro: "태평양을 향해 힘차게 기지개 켜기",
-                desc: "새벽녘 가벼운 트레이닝 웨어를 걸치고 끝없이 뻗어 나가는 해변을 만끽하세요. 미포에서부터 동백섬까지 불어오는 시원한 바람이 전신에 생기 넘치는 활력을 가득 충전해 줍니다.",
-                time: "1.5시간",
-                dist: "3.2 km",
-                tag: "#활력_충전",
-                img: "https://images.unsplash.com/photo-1549693578-d683be217e58?q=80&w=1000&auto=format&fit=crop"
-            },
-            gwangalli: {
-                title: "광안리 해안 로맨틱 코스",
-                intro: "밤바다를 가르는 화려한 빛의 찬란함",
-                desc: "광안대교 불빛이 바다 위에 퍼지기 시작하면 가벼운 음료를 들고 함께 걷기 딱 좋은 시간입니다. 잔잔한 파도 소리를 조명 삼아 가라앉은 마음에 따뜻한 설렘을 가득 불어넣어 보세요.",
-                time: "1시간",
-                dist: "2.5 km",
-                tag: "#야경_로맨스",
-                img: "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?q=80&w=1000&auto=format&fit=crop"
-            },
-            hwangryeong: {
-                title: "황령산 전망대 은하수 코스",
-                intro: "밤하늘 은하수처럼 흐르는 대도심의 불빛",
-                desc: "어둠이 내리면 황령산 봉수대 너머로 수놓아지는 360도 도심 파노라마 야경을 품에 안고 산책해 보세요. 발밑으로 흐르는 찬란한 오색 빛깔 불빛들이 하루의 피로를 완전히 잊게 만듭니다.",
-                time: "2시간",
-                dist: "3.5 km",
-                tag: "#도심_야경",
-                img: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=1000&auto=format&fit=crop"
-            },
-            citizens: {
-                title: "부산 시민공원 초록 오아시스",
-                intro: "도심 속 푹신한 잔디광장 쉼터",
-                desc: "푸르른 메타세쿼이아 나무 그늘 밑 평평한 데크에 자리를 펼쳐두고, 바람에 사각거리는 잎새 소리를 자장가 삼아 여유를 채워봅니다. 깊고 시원하게 호흡하며 자연의 넉넉한 품을 느껴보세요.",
-                time: "2시간",
-                dist: "4.0 km",
-                tag: "#잔디밭_휴식",
-                img: "https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1000&auto=format&fit=crop"
-            }
-        };
+          <button id="save-route-btn" onclick="openSaveModal()" class="w-full py-4 mt-8 bg-brand-olive hover:bg-brand-mint hover:text-brand-navy text-white font-bold rounded-xl transition-all duration-300">
+            현재 추천 동선 내보내기 💾
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const moodButtons = document.querySelectorAll('.mood-btn');
-        const matchResult = document.getElementById('matching-result');
-        const resultContent = document.getElementById('result-content');
+  <!-- 7단계: 마무리 및 액션 유도 CTA 영역 -->
+  <section id="cta" class="relative py-28 bg-white overflow-hidden text-center">
+    <div class="absolute inset-0 bg-brand-bgLight/50 pointer-events-none"></div>
+    <!-- 올리브와 민트의 수채화 그라데이션 구체 비주얼 장식 -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-mint/10 rounded-full blur-[140px] pointer-events-none"></div>
 
-        moodButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 이전 액티브 스타일 초기화
-                moodButtons.forEach(b => {
-                    b.classList.remove('bg-gradient-to-r', 'from-mint', 'to-mint-lime', 'border-mint', 'text-navy-deep', 'shadow-[0_0_20px_rgba(46,229,157,0.3)]');
-                    b.classList.add('bg-white/5', 'border-white/10', 'text-white');
-                });
+    <div class="relative z-10 max-w-4xl mx-auto px-6">
+      <span class="text-xs font-bold tracking-widest text-brand-olive uppercase block mb-3">GO OUT ON A WALK</span>
+      <h2 class="font-title text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-navy leading-tight mb-6">
+        당신의 걸음에 맞는 부산을<br class="sm:hidden"> 지도에 담아가세요.
+      </h2>
+      <p class="text-gray-600 max-w-xl mx-auto text-base md:text-lg font-light leading-relaxed mb-10">
+        준비물은 가벼운 신발 한 켤레로 충분합니다. 산책 코스 정보와 주변의 소중한 로컬 명소를 한 장의 스마트 모바일 패스로 저장하여 출발해 보세요.
+      </p>
 
-                // 현재 버튼 하이라이트화 (라임/민트 그라데이션)
-                btn.classList.add('bg-gradient-to-r', 'from-mint', 'to-mint-lime', 'border-mint', 'text-navy-deep', 'shadow-[0_0_20px_rgba(46,229,157,0.3)]');
-                btn.classList.remove('bg-white/5', 'border-white/10', 'text-white');
+      <!-- 버튼 모음: 클릭 시 호버 효과 및 기능 부여 -->
+      <div class="inline-flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md mx-auto">
+        <button onclick="openSaveModal()" class="group px-8 py-4 bg-brand-navy hover:bg-brand-mint hover:text-brand-navy text-white text-base font-bold rounded-full w-full shadow-xl hover:shadow-brand-mint/20 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+          <span>모바일 지도로 전체 저장</span>
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </button>
+        <a href="#about" class="px-8 py-4 border border-brand-navy/20 hover:border-brand-navy text-brand-navy text-base font-medium rounded-full w-full transition-all duration-300 flex items-center justify-center gap-2">
+          코스 다시 보기
+        </a>
+      </div>
+    </div>
+  </section>
 
-                const targetCourseKey = btn.getAttribute('data-target');
-                const data = courseData[targetCourseKey];
+  <!-- 저장 완료 알림 레이어 모달 -->
+  <div id="save-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-brand-navy/70 backdrop-blur-sm hidden">
+    <div class="bg-white text-brand-navy rounded-3xl p-8 max-w-md w-full mx-6 shadow-2xl border border-gray-100 transform scale-95 transition-transform duration-300">
+      <div class="w-16 h-16 bg-brand-mint/20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 text-brand-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h4 class="font-title text-2xl font-bold text-center mb-2">스마트 패스 저장 완료</h4>
+      <p class="text-sm text-gray-500 text-center leading-relaxed mb-6">
+        선택하신 부산 산책 명소 및 로컬 크루 추천 뷰포인트 지도가 모바일 지도로 성공적으로 저장되었습니다! 오프라인 상태에서도 언제든지 열람할 수 있습니다.
+      </p>
+      <div class="space-y-3">
+        <button onclick="document.execCommand('copy'); alert('내보내기 링크가 복사되었습니다!');" class="w-full py-3 bg-brand-bgLight hover:bg-brand-mint/10 text-brand-navy text-xs font-semibold rounded-xl transition-all">
+          공유 링크 복사하기 🔗
+        </button>
+        <button onclick="closeSaveModal()" class="w-full py-3 bg-brand-navy text-white text-xs font-semibold rounded-xl transition-all">
+          닫기
+        </button>
+      </div>
+    </div>
+  </div>
 
-                // 추천 패널 컨텐츠 렌더링
-                resultContent.innerHTML = `
-                    <div class="lg:col-span-6 space-y-5 text-left animate-[fadeIn_0.5s_ease-out]">
-                        <div class="flex items-center gap-2 text-mint text-xs font-extrabold uppercase tracking-widest bg-white/5 px-3 py-1.5 rounded-full w-fit border border-mint/20">
-                            <span class="w-1.5 h-1.5 rounded-full bg-mint animate-pulse"></span>
-                            Match Success (${data.tag})
-                        </div>
-                        <h3 class="font-title text-3xl font-extrabold text-white">${data.title}</h3>
-                        <p class="text-xs text-mint/80 font-bold -mt-2 font-sans">${data.intro}</p>
-                        <p class="text-sm text-white/85 leading-relaxed font-normal">${data.desc}</p>
-                        <div class="flex items-center gap-8 py-4 text-xs border-y border-white/10">
-                            <div>
-                                <span class="block text-[10px] text-white/40 mb-0.5">걸리는 시간</span>
-                                <span class="font-bold text-mint-lime text-base">${data.time}</span>
-                            </div>
-                            <div>
-                                <span class="block text-[10px] text-white/40 mb-0.5">거리 규격</span>
-                                <span class="font-bold text-white text-base">${data.dist}</span>
-                            </div>
-                        </div>
-                        <div class="pt-2">
-                            <a href="#card-${targetCourseKey}" class="inline-flex items-center gap-2 text-xs text-mint font-extrabold hover:text-white transition-colors group">
-                                상세 팁 & 전체 가이드 보기 <i class="fa-solid fa-arrow-right text-[10px] transform group-hover:translate-x-1 transition-transform"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-6 rounded-3xl overflow-hidden aspect-video shadow-2xl relative border border-white/10">
-                        <img src="${data.img}" alt="${data.title}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/80 to-transparent"></div>
-                    </div>
-                `;
+  <!-- 푸터 영역 -->
+  <footer class="bg-brand-navy text-gray-400 py-16 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-4 gap-12 mb-12">
+        <div class="md:col-span-2 space-y-4">
+          <a href="#" class="font-title text-2xl font-bold text-white tracking-wider">
+            <span class="text-brand-mint">P</span>usan <span class="text-brand-lime">W</span>alk
+          </a>
+          <p class="text-sm text-gray-400 font-light max-w-sm leading-relaxed">
+            부산광역시 도보 여행 브랜드 아카이브 센터. 정해진 목적지를 넘어 스스로 창조해 나가는 여정을 함께합니다.
+          </p>
+        </div>
+        <div>
+          <h5 class="text-white font-semibold mb-4 text-sm tracking-wider">산책로 둘러보기</h5>
+          <ul class="space-y-2 text-sm font-light">
+            <li><a href="#haeundae" class="hover:text-brand-mint transition-all">해운대 & 동백섬 코스</a></li>
+            <li><a href="#gwanganli" class="hover:text-brand-mint transition-all">광안리 & 황령산 야경</a></li>
+            <li><a href="#park" class="hover:text-brand-mint transition-all">도심 속 시민공원</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-semibold mb-4 text-sm tracking-wider font-title">Contact & Support</h5>
+          <p class="text-sm text-gray-400 font-light mb-2">
+            ✉️ support@pusanwalk.org
+          </p>
+          <p class="text-xs text-gray-500 font-light leading-relaxed">
+            공식 연계 및 제휴 문의는 공식 채널을 이용해 주시기 바랍니다.
+          </p>
+        </div>
+      </div>
+      <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-light text-gray-500">
+        <p>© 2026 Pusan Walk Campaign. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-brand-mint transition-all">이용약관</a>
+          <a href="#" class="hover:text-brand-mint transition-all">개인정보처리방침</a>
+          <a href="#" class="hover:text-brand-mint transition-all">위치정보동의</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-                // 패널 활성화 애니메이션
-                matchResult.classList.remove('h-0', 'overflow-hidden', 'pointer-events-none', 'scale-95', 'opacity-0');
-                matchResult.classList.add('scale-100', 'opacity-100', 'mt-8');
+  <!-- JavaScript 모듈 및 동적 인터랙션 정의 -->
+  <script>
+    // 모바일 네비게이션 토글 제어
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-                // 스무스 스크롤로 매칭 섹션 정렬
-                setTimeout(() => {
-                    matchResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100);
-            });
-        });
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
 
-        // 사이트 로드 시 기본 트리거 세팅 (황령산 은하수 코스 디폴트)
-        window.onload = function() {
-            const firstMood = document.querySelector('.mood-btn[data-target="hwangryeong"]');
-            if (firstMood) {
-                firstMood.click();
-            }
-        }
-    </script>
+    // 해시태그 기반 코스 매칭 인터랙티브 필터링 기능
+    function filterCourse(category) {
+      // 모든 코스 목록 선택
+      const sections = document.querySelectorAll('.course-section');
+      const toast = document.getElementById('filter-result-toast');
+
+      sections.forEach(section => {
+        // 부드럽게 강조 해제 초기화
+        section.classList.remove('ring-4', 'ring-brand-mint/50', 'ring-offset-2', 'scale-[1.01]');
+      });
+
+      let selectedId = '';
+      let textFeedback = '';
+
+      if (category === 'ocean') {
+        selectedId = 'haeundae';
+        textFeedback = '🌊 시원한 파도와 함께하는 [해운대 & 동백섬] 코스로 이동합니다.';
+      } else if (category === 'forest') {
+        selectedId = 'park';
+        textFeedback = '🌲 푸른 숲 내음 가득한 [시민공원 코스]가 매칭되었습니다.';
+      } else if (category === 'night') {
+        selectedId = 'gwanganli';
+        textFeedback = '🌌 눈이 즐거운 황홀한 빛의 페스티벌 [광안리 & 황령산 야경 코스]가 매칭되었습니다.';
+      } else if (category === 'flat') {
+        selectedId = 'park';
+        textFeedback = '👨‍👩‍👧‍👦 모두가 안전하고 완만하게 걷기 최고인 [시민공원 코스]로 안내합니다.';
+      }
+
+      const targetSection = document.getElementById(selectedId);
+      if (targetSection) {
+        // 알림 토스트 띄우기
+        toast.innerText = textFeedback;
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+
+        // 스크롤 이동
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // 시각적 강조 피드백
+        setTimeout(() => {
+          targetSection.classList.add('ring-4', 'ring-brand-mint/50', 'ring-offset-2', 'scale-[1.01]');
+        }, 400);
+
+        // 일정 시간 후 토스트 페이드아웃
+        setTimeout(() => {
+          toast.classList.add('opacity-0');
+          toast.classList.remove('opacity-100');
+        }, 5000);
+      }
+    }
+
+    // 미니 맵 포인트 선택 연계 패널 정보 갱신 함수
+    function selectMapSpot(spotKey) {
+      const titleEl = document.getElementById('spot-title');
+      const descWrapper = document.getElementById('spot-desc-wrapper');
+
+      // SVG 경로 투명도 액센트 효과 부여
+      document.getElementById('path-haeundae').style.opacity = '0.3';
+      document.getElementById('path-gwanganli').style.opacity = '0.3';
+      document.getElementById('path-park').style.opacity = '0.3';
+
+      if (spotKey === 'haeundae') {
+        document.getElementById('path-haeundae').style.opacity = '1';
+        titleEl.innerText = "해운대 & 동백섬 힐링 동선";
+        descWrapper.innerHTML = `
+          <div class="space-y-3">
+            <p><strong>거리:</strong> 3.5km | <strong>소요시간:</strong> 약 1시간</p>
+            <p>해변 광장 ➡ 해안 산책 데크 ➡ 누리마루 APEC하우스 ➡ 동백섬 출렁다리 ➡ 미포 미치 하버뷰</p>
+            <div class="p-4 bg-brand-mint/10 border border-brand-mint/20 rounded-xl text-xs text-brand-mint leading-relaxed">
+              ⭐ <strong>로컬 크루 추천 쉼터:</strong> 동백섬 하얀 등대 앞 벤치에 앉아 대마도가 어렴풋이 보이는 대양 뷰를 바라보며 잔잔하게 머무르기 딱 좋습니다.
+            </div>
+          </div>
+        `;
+      } else if (spotKey === 'gwanganli') {
+        document.getElementById('path-gwanganli').style.opacity = '1';
+        titleEl.innerText = "광안리 & 황령산 전망 야간 루트";
+        descWrapper.innerHTML = `
+          <div class="space-y-3">
+            <p><strong>거리:</strong> 4.2km | <strong>소요시간:</strong> 약 1.5시간</p>
+            <p>민락수변공원 ➡ 광안리 해변로 ➡ 남천동 벚꽃거리 ➡ 황령산 봉수대 업힐 전망대</p>
+            <div class="p-4 bg-brand-lime/10 border border-brand-lime/20 rounded-xl text-xs text-brand-lime leading-relaxed">
+              ⭐ <strong>최적의 시간대:</strong> 매주 토요일 오후 7시 전후 광안리 미디어 드론 쇼 시간을 맞춰 수변 스팟을 도보 통과하면 공중 아트워크를 한눈에 볼 수 있습니다.
+            </div>
+          </div>
+        `;
+      } else if (spotKey === 'park') {
+        document.getElementById('path-park').style.opacity = '1';
+        titleEl.innerText = "시민공원 도심 녹지 평탄 루프";
+        descWrapper.innerHTML = `
+          <div class="space-y-3">
+            <p><strong>거리:</strong> 2.8km | <strong>소요시간:</strong> 약 1.2시간</p>
+            <p>남문 야외공연장 ➡ 거울연못 분수 ➡ 메타세쿼이아 에코길 ➡ 기억의 숲 ➡ 도심 가로수 터널</p>
+            <div class="p-4 bg-brand-olive/20 border border-brand-olive/30 rounded-xl text-xs text-white leading-relaxed">
+              ⭐ <strong>무장애(Barrier-free) 탐방:</strong> 전 구간 단차가 없어서 휠체어, 유모차는 물론 고령의 어르신들도 가장 조용하고 아늑한 자연의 공기를 마시며 산책하기에 최적화되어 있습니다.
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // 모달 제어 함수
+    function openSaveModal() {
+      const modal = document.getElementById('save-modal');
+      modal.classList.remove('hidden');
+      modal.querySelector('div').classList.remove('scale-95');
+      modal.querySelector('div').classList.add('scale-100');
+    }
+
+    function closeSaveModal() {
+      const modal = document.getElementById('save-modal');
+      modal.querySelector('div').classList.add('scale-95');
+      modal.querySelector('div').classList.remove('scale-100');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 200);
+    }
+  </script>
 </body>
 </html>
