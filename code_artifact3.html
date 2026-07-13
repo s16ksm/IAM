@@ -8,7 +8,7 @@
   <!-- Google Fonts: Hahmlet (제목용), Plus Jakarta Sans (영문용) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;600;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@300;400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">0,800;1,400&display=swap" rel="stylesheet">
   
   <!-- 눈누 프리텐다드 폰트 (국문 본문용) -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
@@ -68,6 +68,12 @@
     }
     .hero-gradient {
       background: linear-gradient(180deg, rgba(15, 26, 44, 0.4) 0%, rgba(15, 26, 44, 0.95) 100%);
+    }   
+
+    /* 영어 전용 폰트 클래스 */
+    .font-logo {
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
     }
     /* 패럴랙스 이미지를 위한 부드러운 하드웨어 가속 선언 */
     .parallax-bg {
@@ -86,7 +92,7 @@
   <!-- 네비게이션 바 및 스크롤 진행률 컨테이너 -->
   <nav class="fixed top-0 left-0 w-full z-50 bg-brand-navy/80 backdrop-blur-md border-b border-white/10 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <a href="#" class="font-title text-xl md:text-2xl font-bold text-white tracking-wider flex items-center gap-2">
+      <a href="#" class="font-logo text-xl md:text-2xl font-bold text-white tracking-wider flex items-center gap-2">
         <span class="text-brand-mint">W</span>alk <span class="text-brand-lime">B</span>usan
       </a>
       
@@ -249,9 +255,7 @@
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7">
           <div class="relative overflow-hidden rounded-3xl shadow-xl aspect-video">
-            <img src="h.jpg" alt="해운대" class="w-full h-full object-cover" alt="해운대 동백섬" class="w-full h-full object-cover">
-            <div class="absolute top-6 left-6 z-20 flex gap-2">
-              <span class="px-3 py-1 bg-brand-navy text-brand-mint text-xs font-semibold rounded-full uppercase">Ocean</span>
+            <img src="h.jpg" alt="해운대" class="w-full h-full object-cover">
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4">
@@ -305,10 +309,12 @@
   </section>
 
   <!-- 2. 광안리 -->
-  <section id="gwanganli" class="py-24 bg-brand-navy text-white course-section transition-all duration-500">
+  <section id="gwanganli" class="py-24 bg-brand-navy text-white course-section">
     <div class="max-w-7xl mx-auto px-6">
       <div class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-5 space-y-6 lg:order-1 order-2">
+        <div class="lg:col-span-7 lg:order-2 order-1">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl aspect-video">
+            <img src="g.jpg" alt="광안리" class="w-full h-full object-cover">
           <span class="text-brand-mint font-bold text-sm tracking-wider uppercase">Walk 02</span>
           <h3 class="font-title text-3xl md:text-4xl font-extrabold leading-tight">
             오색 찬란한 불빛들의 향연,<br>광안리 & 황령산 야경 코스
@@ -316,7 +322,18 @@
           <p class="text-gray-300 leading-relaxed font-light">
             은은한 달빛 아래 파도를 맞으며 걷는 광안리 해변부터 시작해, 부산 전역의 불빛들을 조용히 내려다볼 수 있는 황령산 전망대까지 연결되는 야간 산책 코스입니다. 해 질 녘 광안대교의 불이 하나둘 켜지는 순간을 바라보며 걸으면 마음이 몽글몽글해집니다.
           </p>
-
+<section id="park" class="py-24 bg-white course-section">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl aspect-video">
+            <img src="hr.jpg" alt="황령산 야경" class="w-full h-full object-cover">
+          </div>
+        </div>
+        <!-- ... 나머지 텍스트 내용 ... -->
+      </div>
+    </div>
+  </section>
           <div class="grid grid-cols-3 gap-4 py-4 border-y border-white/10">
             <div>
               <span class="block text-xs text-gray-400 mb-1">소요 시간</span>
